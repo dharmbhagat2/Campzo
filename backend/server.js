@@ -4,9 +4,7 @@ const otpGenerator = require("otp-generator");
 const otpStore = require("./otp/otpStore");
 const sendOTP = require("./utils/sendOTP");
 const generateQRCode = require("./utils/qrGenerator");
-
 const generateTicket = require("./utils/ticketGenerator");
-
 const sendTicket = require("./utils/mail");
 const express = require("express");
 const mysql = require("mysql2");
@@ -14,7 +12,6 @@ const cors = require("cors");
 const multer = require("multer");
 const path = require("path");
 const Razorpay = require("razorpay");
-
 const app = express();
 
 
@@ -22,8 +19,8 @@ const app = express();
 // 🔥 RAZORPAY
 // ==========================================
 const razorpay = new Razorpay({
-    key_id: "rzp_test_Sm1kCm9tLZsKBT",
-    key_secret: "L66cGpaRXxeLmnQ9SoLsf4k4"
+    key_id: process.env.RAZORPAY_KEY_ID,
+    key_secret: process.env.RAZORPAY_KEY_SECRET
 });
 
 // ==========================================
@@ -31,16 +28,17 @@ const razorpay = new Razorpay({
 // ==========================================
 app.use(cors());
 app.use(express.json());
-app.use("/uploads", express.static("uploads"));
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // ==========================================
 // 🔥 MYSQL CONNECTION
 // ==========================================
 const db = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "dharm",
-    database: "event_management"
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
+    port: process.env.DB_PORT
 });
 
 db.connect(err => {
@@ -686,16 +684,6 @@ app.post("/register", async (req, res) => {
 
 });
 
-// ==========================================
-// 🚀 START SERVER
-// ==========================================
-app.listen(3000, () => {
-
-    console.log(
-        "🚀 Server running on http://localhost:3000"
-    );
-});
-
 app.post("/feedback", (req,res)=>{
 
 const {
@@ -813,4 +801,21 @@ app.post("/scan-attendance", (req, res) => {
 
     });
 
+});
+// ==========================================
+// SERVE FRONTEND
+// ==========================================
+app.use(express.static(path.join(__dirname, "../")));
+
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "../index.html"));
+});
+
+// ==========================================
+// START SERVER
+// ==========================================
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+    console.log(`🚀 Server running on port ${PORT}`);
 });
