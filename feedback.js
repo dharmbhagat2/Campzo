@@ -1,7 +1,7 @@
 function submitFeedback(){
 
 fetch(
-"http://localhost:3000/feedback",
+"https://campzo.onrender.com/feedback",
 {
 method:"POST",
 headers:{

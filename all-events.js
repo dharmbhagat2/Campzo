@@ -1,7 +1,7 @@
 window.onload = loadAllEvents;
 
 async function loadAllEvents() {
-    const res = await fetch("http://localhost:3000/events");
+    const res = await fetch("https://campzo.onrender.com/events");
     const events = await res.json();
 
     const currentDiv = document.getElementById("currentEvents");
@@ -47,7 +47,7 @@ async function loadAllEvents() {
 async function deleteEvent(id) {
     if (!confirm("Are you sure you want to delete this event?")) return;
 
-    await fetch(`http://localhost:3000/events/${id}`, {
+    await fetch(`https://campzo.onrender.com/events/${id}`, {
         method: "DELETE"
     });
 

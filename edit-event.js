@@ -14,7 +14,7 @@ async function loadEvent() {
 
         const res =
         await fetch(
-            "http://localhost:3000/events"
+            "https://campzo.onrender.com/events"
         );
 
         const events =
@@ -197,7 +197,7 @@ async function updateEvent(){
 
         await fetch(
 
-        `http://localhost:3000/events/${eventId}`,
+        `https://campzo.onrender.com/events/${eventId}`,
 
         {
             method:"PUT",

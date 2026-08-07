@@ -16,7 +16,7 @@ async function login() {
 
     try {
 
-        const response = await fetch("http://localhost:3000/login-user", {
+        const response = await fetch("https://campzo.onrender.com/login-user", {
 
             method: "POST",
 
@@ -85,7 +85,7 @@ async function register() {
 
     try {
 
-        const response = await fetch("http://localhost:3000/send-otp", {
+        const response = await fetch("https://campzo.onrender.com/send-otp", {
 
             method: "POST",
 
@@ -140,7 +140,7 @@ async function verifyOTP() {
     try {
 
         // Verify OTP
-        const verifyResponse = await fetch("http://localhost:3000/verify-otp", {
+        const verifyResponse = await fetch("https://campzo.onrender.com/verify-otp", {
 
             method: "POST",
 
@@ -167,7 +167,7 @@ async function verifyOTP() {
         }
 
         // Save User in MySQL
-        const registerResponse = await fetch("http://localhost:3000/register-user", {
+        const registerResponse = await fetch("https://campzo.onrender.com/register-user", {
 
             method: "POST",
 

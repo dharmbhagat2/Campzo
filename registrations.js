@@ -3,7 +3,7 @@ let registrations = [];
 // 🔥 LOAD FROM DATABASE
 function loadRegistrations() {
 
-fetch("http://localhost:3000/registrations")
+fetch("https://campzo.onrender.com/registrations")
 .then(res=>res.json())
 .then(data=>{
 
@@ -187,7 +187,7 @@ showConfirm(
 ()=>{
 
 fetch(
-`http://localhost:3000/delete/${id}`,
+`https://campzo.onrender.com/delete/${id}`,
 {
 method:"DELETE"
 }
@@ -233,7 +233,7 @@ Promise.all(
 registrations.map(r=>
 
 fetch(
-`http://localhost:3000/delete/${r._id}`,
+`https://campzo.onrender.com/delete/${r._id}`,
 {
 method:"DELETE"
 }

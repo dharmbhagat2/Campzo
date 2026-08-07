@@ -1,8 +1,8 @@
 // 🔥 LOAD DASHBOARD DATA
 async function loadDashboard() {
     try {
-        let eventsRes = await fetch("http://localhost:3000/events");
-        let registrationsRes = await fetch("http://localhost:3000/registrations");
+        let eventsRes = await fetch("https://campzo.onrender.com/events");
+        let registrationsRes = await fetch("https://campzo.onrender.com/registrations");
 
         let events = await eventsRes.json();
         let registrations = await registrationsRes.json();
@@ -59,7 +59,7 @@ async function loadDashboard() {
 async function loadAnalytics() {
 
     try {
-        const res = await fetch("http://localhost:3000/registrations");
+        const res = await fetch("https://campzo.onrender.com/registrations");
         const registrations = await res.json();
 
         if (registrations.length === 0) {

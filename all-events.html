@@ -99,7 +99,7 @@
 <script>
 // 🔥 LOAD EVENTS
 async function loadEvents() {
-    const res = await fetch("http://localhost:3000/events");
+    const res = await fetch("https://campzo.onrender.com/events");
     const events = await res.json();
 
     const today = new Date();
@@ -146,7 +146,7 @@ async function loadEvents() {
 async function deleteEvent(id) {
     if (!confirm("Delete this event?")) return;
 
-    await fetch(`http://localhost:3000/events/${id}`, {
+    await fetch(`https://campzo.onrender.com/events/${id}`, {
         method: "DELETE"
     });
 

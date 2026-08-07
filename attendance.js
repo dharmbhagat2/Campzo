@@ -10,7 +10,7 @@ async function onScanSuccess(decodedText) {
     try {
 
         const response = await fetch(
-            "http://localhost:3000/scan-attendance",
+            "https://campzo.onrender.com/scan-attendance",
             {
 
                 method: "POST",

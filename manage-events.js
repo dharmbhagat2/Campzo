@@ -54,7 +54,7 @@ async function addEvent() {
     }
 
     try {
-        await fetch("http://localhost:3000/events", {
+        await fetch("https://campzo.onrender.com/events", {
             method: "POST",
             body: formData
         });
@@ -73,7 +73,7 @@ showToast("Event Added Successfully ✅");
 // 🔥 LOAD EVENTS
 // ==========================================
 async function loadEvents() {
-    const res = await fetch("http://localhost:3000/events");
+    const res = await fetch("https://campzo.onrender.com/events");
     const events = await res.json();
 
     let table = document.getElementById("eventTable");
@@ -110,7 +110,7 @@ async function loadEvents() {
 // 🔥 DELETE EVENT
 // ==========================================
 async function deleteEvent(id) {
-    await fetch(`http://localhost:3000/events/${id}`, {
+    await fetch(`https://campzo.onrender.com/events/${id}`, {
         method: "DELETE"
     });
 

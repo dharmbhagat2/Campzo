@@ -94,7 +94,7 @@ async function payNow() {
 
         // 🔥 CREATE ORDER
         const res = await fetch(
-            "http://localhost:3000/create-order",
+            "https://campzo.onrender.com/create-order",
             {
                 method: "POST",
                 headers: {
@@ -163,7 +163,7 @@ async function payNow() {
 
                 // 🔥 SAVE REGISTRATION
                 await fetch(
-                    "http://localhost:3000/register",
+                    "https://campzo.onrender.com/register",
                     {
                         method: "POST",
 

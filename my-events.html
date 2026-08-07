@@ -179,7 +179,7 @@ async function deregisterEvent(id){
 
         const response = await fetch(
 
-            `http://localhost:3000/deregister/${id}`,
+            `https://campzo.onrender.com/deregister/${id}`,
 
             {
                 method:"DELETE"
@@ -239,7 +239,7 @@ async function loadMyEvents(){
         // GET REGISTRATIONS
         const regRes=
         await fetch(
-            "http://localhost:3000/registrations"
+            "https://campzo.onrender.com/registrations"
         );
 
         const registrations=
@@ -249,7 +249,7 @@ async function loadMyEvents(){
         // GET EVENTS
         const eventRes=
         await fetch(
-            "http://localhost:3000/events"
+            "https://campzo.onrender.com/events"
         );
 
         const events=

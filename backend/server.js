@@ -117,7 +117,7 @@ app.post("/events", upload.single("image"), (req, res) => {
     } = req.body;
 
     let imagePath = req.file
-        ? `http://localhost:3000/uploads/${req.file.filename}`
+        ? `https://campzo.onrender.com/uploads/${req.file.filename}`
         : "";
 
     const sql = `
@@ -169,7 +169,7 @@ app.put("/events/:id", upload.single("image"), (req, res) => {
     } = req.body;
 
     let imagePath = req.file
-        ? `http://localhost:3000/uploads/${req.file.filename}`
+        ? `https://campzo.onrender.com/uploads/${req.file.filename}`
         : null;
 
     let sql = "";

@@ -69,11 +69,11 @@ async function loadAnalytics() {
     try {
 
         const eventRes = await fetch(
-            "http://localhost:3000/events"
+            "https://campzo.onrender.com/events"
         );
 
         const regRes = await fetch(
-            "http://localhost:3000/registrations"
+            "https://campzo.onrender.com/registrations"
         );
 
         const events = await eventRes.json();

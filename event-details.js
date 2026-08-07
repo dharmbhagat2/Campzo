@@ -8,7 +8,7 @@ if (!eventId) {
 }
 
 // 🔥 LOAD EVENT DATA
-fetch("http://localhost:3000/events")
+fetch("https://campzo.onrender.com/events")
     .then(res => res.json())
     .then(events => {
 
@@ -94,7 +94,7 @@ fetch("http://localhost:3000/events")
             if (currentEvent.image.startsWith("http")) {
                 img.src = currentEvent.image;
             } else {
-                img.src = `http://localhost:3000/uploads/${currentEvent.image}`;
+                img.src = `https://campzo.onrender.com/uploads/${currentEvent.image}`;
             }
 
         } else {
@@ -125,7 +125,7 @@ async function registerEvent() {
 
     try {
 
-        const response = await fetch("http://localhost:3000/register", {
+        const response = await fetch("https://campzo.onrender.com/register", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

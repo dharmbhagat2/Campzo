@@ -58,7 +58,7 @@ async function loadHomeEvents() {
 
         const res =
             await fetch(
-                "http://localhost:3000/events"
+                "https://campzo.onrender.com/events"
             );
 
         let events =
