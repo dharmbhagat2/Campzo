@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manage Events</title>
+<link rel="stylesheet" href="admin.css">
+
+<style>
+/* 🔥 IMAGE PREVIEW */
+#imagePreview {
+    width: 220px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-top: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease;
+}
+
+/* 🔥 BOUNCE ANIMATION */
+@keyframes bounce {
+    0%   { transform: scale(0.9); }
+    50%  { transform: scale(1.08); }
+    100% { transform: scale(1); }
+}
+
+.bounce {
+    animation: bounce 0.4s ease;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="sidebar">
+    <h2>Admin Panel</h2>
+    <a href="admin.html">Dashboard</a>
+    <a href="manage-events.html">Manage Events</a>
+    <a href="registrations.html">Registrations</a>
+    <a href="all-events.html">All Events</a>
+    <a href="index.html">Logout</a>
+</div>
+
+<div class="main">
+
+<h1>Manage Events</h1>
+
+<div class="form-container">
+
+<form id="eventForm" enctype="multipart/form-data">
+
+    <!-- TITLE -->
+    <label for="eventTitle">Event Title</label>
+    <input id="eventTitle" placeholder="Enter Event Title" required>
+
+    <!-- DESCRIPTION -->
+    <label for="eventDescription">Description</label>
+    <textarea id="eventDescription" placeholder="Enter Description"></textarea>
+
+    <!-- 🔥 IMAGE PREVIEW -->
+<!-- IMAGE INPUT -->
+<label for="eventImage">Event Photo</label>
+<input type="file" id="eventImage" accept="image/*">
+
+<!-- 🔥 PREVIEW (HIDDEN INITIALLY) -->
+<div id="previewContainer" style="display:none;">
+    <img id="imagePreview" alt="Event Preview Image">
+
+    <br><br>
+
+    <!-- 🔥 CHANGE IMAGE BUTTON -->
+    <button type="button" id="changeImageBtn">Change Image</button>
+</div>
+    <!-- DATE -->
+    <label for="eventDate">Event Date</label>
+    <input type="date" id="eventDate" required>
+
+    <div class="form-group">
+    <label for="eventTime">Event Time</label>
+    <input type="time" id="eventTime" required>
+</div>
+
+    <!-- PRICE -->
+ <div class="form-group">
+    <label for="eventPriceType">Event Price</label>
+    
+    <select id="eventPriceType" onchange="togglePriceInput()">
+        <option value="free">Free</option>
+        <option value="custom">Custom</option>
+    </select>
+</div>
+
+<!-- 🔥 HIDDEN INPUT -->
+<div class="form-group" id="customPriceBox" style="display:none;">
+    <label for="customPrice">Enter Price (₹)</label>
+    <input type="number" id="customPrice" placeholder="Enter amount">
+</div>
+
+    <!-- MOBILE -->
+    <label for="eventMobile">Mobile Number</label>
+    <input id="eventMobile" placeholder="Enter Mobile Number">
+
+    <!-- EMAIL -->
+    <label for="eventEmail">Email ID</label>
+    <input id="eventEmail" placeholder="Enter Email">
+
+    <button type="button" id="addBtn">Add Event</button>
+
+</form>
+
+</div>
+
+</div>
+
+<!-- 🔥 JS -->
+<script src="manage-events.js"></script>
+<div id="toast-container"></div>
+<script src="toast.js"></script>
+
+<script>
+// 🔥 IMAGE PREVIEW + BOUNCE
+document.getElementById("eventImage").addEventListener("change", function () {
+    const file = this.files[0];
+    const preview = document.getElementById("imagePreview");
+
+    if (file) {
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+            preview.src = e.target.result;
+
+            // bounce effect
+            preview.classList.add("bounce");
+
+            setTimeout(() => {
+                preview.classList.remove("bounce");
+            }, 400);
+        };
+
+        reader.readAsDataURL(file);
+    } else {
+        preview.src = "https://via.placeholder.com/300";
+    }
+});
+</script>
+<div id="toast" class="toast"></div>
+</body>
+</html>

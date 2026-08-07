@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>All Events</title>
+<link rel="stylesheet" href="admin.css">
+
+<style>
+.event-sections {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.event-box {
+    flex: 1;
+    background: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.event-box h3 {
+    margin-bottom: 10px;
+}
+
+.event-box ul {
+    list-style: none;
+    padding: 0;
+}
+
+.event-box li {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+/* 🔥 BUTTON STYLE */
+.btn-group {
+    margin-top: 5px;
+}
+
+.btn-group button {
+    margin-right: 5px;
+    padding: 4px 8px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.edit-btn {
+    background: #ffc107;
+}
+
+.delete-btn {
+    background: #dc3545;
+    color: white;
+}
+</style>
+</head>
+
+<body>
+
+<div class="sidebar">
+    <h2>Admin Panel</h2>
+    <a href="admin.html">Dashboard</a>
+    <a href="manage-events.html">Manage Events</a>
+    <a href="registrations.html">Registrations</a>
+    <a href="all-events.html">All Events</a>
+    <a href="index.html">Logout</a>
+</div>
+
+<div class="main">
+
+<h1>All Events</h1>
+
+<div class="event-sections">
+
+    <div class="event-box">
+        <h3>🔥 Current Events</h3>
+        <ul id="currentEvents"></ul>
+    </div>
+
+    <div class="event-box">
+        <h3>⏳ Future Events</h3>
+        <ul id="futureEvents"></ul>
+    </div>
+
+    <div class="event-box">
+        <h3>📁 Past Events</h3>
+        <ul id="pastEvents"></ul>
+    </div>
+
+</div>
+
+</div>
+
+<script>
+// 🔥 LOAD EVENTS
+async function loadEvents() {
+    const res = await fetch("http://localhost:3000/events");
+    const events = await res.json();
+
+    const today = new Date();
+
+    const current = document.getElementById("currentEvents");
+    const future = document.getElementById("futureEvents");
+    const past = document.getElementById("pastEvents");
+
+    current.innerHTML = "";
+    future.innerHTML = "";
+    past.innerHTML = "";
+
+    events.forEach(event => {
+        let eventDate = new Date(event.date);
+
+        let diff = (eventDate - today) / (1000 * 60 * 60 * 24);
+
+        let item = `
+            <li>
+                <strong>${event.title}</strong> (${event.date.split("T")[0]})
+
+                <div class="btn-group">
+                    <button class="edit-btn" onclick="editEvent(${event.id})">✏️ Edit</button>
+                    <button class="delete-btn" onclick="deleteEvent(${event.id})">🗑 Delete</button>
+                </div>
+            </li>
+        `;
+
+        if (Math.abs(diff) <= 1) {
+            current.innerHTML += item;
+        } else if (diff > 1) {
+            future.innerHTML += item;
+        } else {
+            past.innerHTML += item;
+        }
+    });
+
+    if (!current.innerHTML) current.innerHTML = "<li>No Current Events</li>";
+    if (!future.innerHTML) future.innerHTML = "<li>No Future Events</li>";
+    if (!past.innerHTML) past.innerHTML = "<li>No Past Events</li>";
+}
+
+// 🗑 DELETE EVENT
+async function deleteEvent(id) {
+    if (!confirm("Delete this event?")) return;
+
+    await fetch(`http://localhost:3000/events/${id}`, {
+        method: "DELETE"
+    });
+
+    alert("Deleted Successfully");
+    loadEvents();
+}
+
+// ✏️ EDIT EVENT
+function editEvent(id) {
+    localStorage.setItem("editEventId", id);
+    window.location.href = "edit-event.html";
+}
+
+loadEvents();
+</script>
+
+</body>
+</html>

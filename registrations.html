@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Registrations</title>
+
+<link rel="stylesheet" href="admin.css">
+
+<style>
+
+.top-bar{
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+margin:25px 0;
+
+flex-wrap:wrap;
+gap:15px;
+}
+
+#searchInput{
+
+width:300px;
+
+padding:12px 15px;
+
+border:1px solid #ddd;
+border-radius:8px;
+
+font-size:15px;
+
+outline:none;
+}
+
+#searchInput:focus{
+
+border-color:#4e73df;
+
+box-shadow:
+0 0 8px rgba(78,115,223,.3);
+
+}
+
+.actions{
+
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+
+}
+
+.actions button{
+
+padding:12px 18px;
+
+border:none;
+
+border-radius:8px;
+
+cursor:pointer;
+
+font-weight:600;
+
+font-size:14px;
+
+color:white;
+
+transition:.3s;
+}
+
+.actions button:hover{
+
+transform:translateY(-2px);
+
+}
+
+.actions button:nth-child(1){
+
+background:#3498db;
+}
+
+.actions button:nth-child(2){
+
+background:#1abc9c;
+}
+
+.actions .danger{
+
+background:#e74c3c;
+}
+
+
+/* table */
+
+.modern-table{
+
+width:100%;
+
+border-collapse:collapse;
+
+background:white;
+
+border-radius:10px;
+
+overflow:hidden;
+
+box-shadow:
+0 4px 15px rgba(0,0,0,.1);
+
+}
+
+.modern-table th{
+
+background:#2c3e50;
+
+color:white;
+
+padding:15px;
+
+text-align:left;
+
+}
+
+.modern-table td{
+
+padding:15px;
+
+border-bottom:
+1px solid #eee;
+
+}
+
+.modern-table tr:hover{
+
+background:#f7f9fc;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+<h2>Admin Panel</h2>
+
+<a href="admin.html">
+Dashboard
+</a>
+
+<a href="manage-events.html">
+Manage Events
+</a>
+
+<a href="registrations.html">
+Registrations
+</a>
+
+<a href="all-events.html">
+All Events
+</a>
+
+<a href="index.html">
+Logout
+</a>
+
+</div>
+
+
+<div class="main">
+
+<h1>
+Event Registrations
+</h1>
+
+
+<div class="top-bar">
+
+<label for="sortSelect" style="display:none;">Sort Registrations</label>
+
+<select
+    id="sortSelect"
+    title="Sort Registrations"
+    aria-label="Sort Registrations"
+    onchange="sortRegistrations()">
+
+    <option value="">Sort By</option>
+    <option value="popular">🔥 Most Popular Event</option>
+    <option value="leastPopular">📉 Least Popular Event</option>
+    <option value="nameAZ">🔤 Name (A-Z)</option>
+    <option value="nameZA">🔠 Name (Z-A)</option>
+</select>
+
+<div class="actions">
+
+<button onclick="downloadPDF()">
+📄 Download PDF
+</button>
+
+<button onclick="exportCSV()">
+📊 Export CSV
+</button>
+
+<button
+onclick="clearAll()"
+class="danger">
+
+🗑 Clear All
+
+</button>
+
+</div>
+
+</div>
+
+
+<table
+id="regTable"
+class="modern-table">
+
+</table>
+
+</div>
+
+
+<!-- Confirm Box -->
+
+<div
+id="customConfirm"
+class="confirm-modal">
+
+<div class="confirm-box">
+
+<p id="confirmText">
+
+Are you sure?
+
+</p>
+
+<div class="confirm-actions">
+
+<button id="confirmYes">
+
+Yes
+
+</button>
+
+<button id="confirmNo">
+
+Cancel
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- TOAST -->
+
+<div id="toast"></div>
+
+
+<!-- PDF libraries -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
+
+
+<!-- JS -->
+
+<script src="registrations.js"></script>
+
+<script src="toast.js"></script>
+
+</body>
+
+</html>

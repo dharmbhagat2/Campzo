@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | Campzo</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Toast -->
+    <div id="toastContainer"></div>
+
+    <!-- Register Card -->
+    <div class="auth-container">
+
+        <div class="auth-card">
+
+            <h2>Register</h2>
+
+            <input
+                type="text"
+                id="name"
+                placeholder="Enter Full Name"
+                autocomplete="name"
+            >
+
+            <input
+                type="email"
+                id="email"
+                placeholder="Enter Email"
+                autocomplete="email"
+            >
+
+            <input
+                type="tel"
+                id="mobile"
+                placeholder="Enter Mobile Number"
+                autocomplete="tel"
+            >
+
+            <input
+                type="password"
+                id="password"
+                placeholder="Enter Password"
+                autocomplete="new-password"
+            >
+
+            <button type="button" onclick="register()">
+                Register
+            </button>
+
+            <p id="msg" class="form-message"></p>
+
+            <p>
+                Already have an account?
+                <a href="login.html">Login</a>
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- ===========================
+         OTP MODAL
+    ============================ -->
+
+    <div id="otpModal" class="otp-modal">
+
+        <div class="otp-box">
+            <span class="close-otp" onclick="closeOTP()">&times;</span>
+
+            <h2>📧 Email Verification</h2>
+
+            <p>
+                Enter the 6-digit OTP sent to your email
+            </p>
+
+            <div class="otp-inputs">
+
+                <label for="otp1" class="sr-only">OTP Digit 1</label>
+                <input
+                    id="otp1"
+                    class="otp"
+                    type="text"
+                    maxlength="1"
+                    placeholder="0"
+                    title="OTP Digit 1"
+                >
+
+                <label for="otp2" class="sr-only">OTP Digit 2</label>
+                <input
+                    id="otp2"
+                    class="otp"
+                    type="text"
+                    maxlength="1"
+                    placeholder="0"
+                    title="OTP Digit 2"
+                >
+
+                <label for="otp3" class="sr-only">OTP Digit 3</label>
+                <input
+                    id="otp3"
+                    class="otp"
+                    type="text"
+                    maxlength="1"
+                    placeholder="0"
+                    title="OTP Digit 3"
+                >
+
+                <label for="otp4" class="sr-only">OTP Digit 4</label>
+                <input
+                    id="otp4"
+                    class="otp"
+                    type="text"
+                    maxlength="1"
+                    placeholder="0"
+                    title="OTP Digit 4"
+                >
+
+                <label for="otp5" class="sr-only">OTP Digit 5</label>
+                <input
+                    id="otp5"
+                    class="otp"
+                    type="text"
+                    maxlength="1"
+                    placeholder="0"
+                    title="OTP Digit 5"
+                >
+
+                <label for="otp6" class="sr-only">OTP Digit 6</label>
+                <input
+                    id="otp6"
+                    class="otp"
+                    type="text"
+                    maxlength="1"
+                    placeholder="0"
+                    title="OTP Digit 6"
+                >
+
+            </div>
+
+            <button type="button" onclick="verifyOTP()">
+                Verify OTP
+            </button>
+
+        </div>
+
+    </div>
+
+    <script src="auth.js"></script>
+    <script src="toast.js"></script>
+
+</body>
+
+</html>

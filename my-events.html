@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Events</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+.my-events-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.event-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transition: 0.3s;
+}
+
+.event-card:hover {
+    transform: translateY(-5px);
+}
+
+.event-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+.event-content {
+    padding: 15px;
+}
+
+.event-content h3 {
+    margin: 0 0 10px;
+}
+
+.event-content p {
+    margin: 5px 0;
+    color: #555;
+}
+
+.event-actions{
+
+    display:flex;
+
+    gap:10px;
+
+    justify-content:center;
+
+    margin-top:15px;
+
+}
+
+.btn{
+
+    flex:1;
+
+    padding:10px;
+
+    border:none;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    font-weight:bold;
+
+    transition:.3s;
+
+}
+
+.btn-view{
+
+    background:#2d5be3;
+
+    color:white;
+
+}
+
+.btn-view:hover{
+
+    background:#1f49c7;
+
+}
+
+.btn-delete{
+
+    background:#dc3545;
+
+    color:white;
+
+}
+
+.btn-delete:hover{
+
+    background:#b02a37;
+
+}
+
+.btn {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.btn-view {
+    background: #2d5be3;
+    color: white;
+}
+
+.btn-delete {
+    background: red;
+    color: white;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="navbar">
+    <div class="logo">College Event</div>
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="events.html">Events</a>
+        <a href="#" onclick="logout()">Logout</a>
+    </div>
+</div>
+
+<h2 style="text-align:center;">My Registered Events</h2>
+
+<div id="myEvents" class="my-events-container"></div>
+
+<script>
+
+// LOGOUT
+function logout(){
+
+    localStorage.removeItem(
+        "loggedUser"
+    );
+
+    localStorage.removeItem(
+        "loggedUserName"
+    );
+
+    window.location.href=
+    "login.html";
+}
+
+
+// VIEW EVENT
+function viewEvent(id){
+
+    localStorage.setItem(
+        "selectedEventId",
+        id
+    );
+
+    window.location.href=
+    "event-details.html";
+}
+
+// DE-REGISTER EVENT
+async function deregisterEvent(id){
+
+   // if(!confirm("Are you sure you want to de-register from this event?")){
+      //  return; }
+
+    try{
+
+        const response = await fetch(
+
+            `http://localhost:3000/deregister/${id}`,
+
+            {
+                method:"DELETE"
+            }
+
+        );
+
+        const data = await response.json();
+
+        if(data.success){
+
+            showToast(
+                "Registration Cancelled Successfully",
+                "success"
+            );
+
+            loadMyEvents();
+
+        }else{
+
+            showToast(
+                data.message,
+                "error"
+            );
+
+        }
+
+    }
+    catch(err){
+
+        console.log(err);
+
+        showToast(
+            "Server Error",
+            "error"
+        );
+
+    }
+
+}
+
+// LOAD REGISTERED EVENTS
+async function loadMyEvents(){
+
+    let user=
+    localStorage.getItem(
+        "loggedUser"
+    );
+
+    let container=
+    document.getElementById(
+        "myEvents"
+    );
+
+    try{
+
+        // GET REGISTRATIONS
+        const regRes=
+        await fetch(
+            "http://localhost:3000/registrations"
+        );
+
+        const registrations=
+        await regRes.json();
+
+
+        // GET EVENTS
+        const eventRes=
+        await fetch(
+            "http://localhost:3000/events"
+        );
+
+        const events=
+        await eventRes.json();
+
+
+        // CURRENT USER EVENTS
+        const myRegistrations=
+        registrations.filter(
+            r=>r.email===user
+        );
+
+        container.innerHTML="";
+
+
+        if(
+            myRegistrations.length===0
+        ){
+
+            container.innerHTML=
+            `
+            <h2 style="
+            color:white;
+            width:100%;
+            text-align:center;
+            ">
+            No registrations yet
+            </h2>
+            `;
+
+            return;
+        }
+
+
+        myRegistrations.forEach(reg=>{
+
+            let event=
+            events.find(
+                e=>e.id==reg.eventId
+            );
+
+            if(!event) return;
+
+
+            let eventDate=
+            new Date(event.date);
+
+            let today=
+            new Date();
+
+            today.setHours(
+                0,0,0,0
+            );
+
+            eventDate.setHours(
+                0,0,0,0
+            );
+
+
+            // COMPLETED EVENT
+            let completed=
+            eventDate<today;
+
+
+            let formattedDate=
+            eventDate.toLocaleDateString(
+                "en-IN",
+                {
+                    day:"2-digit",
+                    month:"short",
+                    year:"numeric"
+                }
+            );
+
+
+            container.innerHTML+=`
+
+            <div class="event-card"
+
+            style="
+            ${
+            completed
+            ?
+            `
+            filter:grayscale(100%);
+            opacity:0.7;
+            `
+            :
+            ``
+            }
+            ">
+
+                <img
+                src="${
+                event.image ||
+                'https://via.placeholder.com/300'
+                }">
+
+                <div class="event-content">
+
+                    <h3>
+                    ${event.title}
+                    </h3>
+
+                    <p>
+                    📅 ${formattedDate}
+                    </p>
+
+                    <p>
+                    💰 ₹${reg.amount}
+                    </p>
+
+                    <p style="
+                    font-weight:bold;
+                    color:
+                    ${
+                    completed
+                    ?
+                    '#666'
+                    :
+                    'green'
+                    };
+                    ">
+
+                    ${
+                    completed
+                    ?
+                    "Completed"
+                    :
+                    "Live"
+                    }
+
+                    </p>
+
+                    <div class="event-actions">
+
+    <button
+        class="btn btn-view"
+        onclick="viewEvent(${event.id})">
+        View
+    </button>
+
+    <button
+        class="btn btn-delete"
+        onclick="deregisterEvent(${reg.id})">
+        Delete
+    </button>
+
+</div>
+
+                </div>
+
+            </div>
+
+            `;
+
+        });
+
+    }
+    catch(error){
+
+        console.log(error);
+
+        container.innerHTML=
+        `
+        <h2 style="
+        color:red;
+        text-align:center;
+        width:100%;
+        ">
+        Failed to load events
+        </h2>
+        `;
+    }
+}
+
+
+// INITIAL LOAD
+loadMyEvents();
+
+</script>
+<div id="toast-container"></div>
+
+<script src="toast.js"></script>
+</body>
+</html>

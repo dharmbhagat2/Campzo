@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Edit Event</title>
+
+<link rel="stylesheet" href="admin.css">
+
+<style>
+
+body{
+    overflow-y:auto;
+}
+
+.main{
+    padding-bottom:80px;
+}
+
+.form-container{
+    max-width:550px;
+    margin:40px auto;
+    background:#fff;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 6px 20px rgba(0,0,0,.1);
+}
+
+.form-container h2{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.form-group{
+    margin-bottom:18px;
+}
+
+.form-group label{
+    display:block;
+    margin-bottom:8px;
+    font-weight:600;
+}
+
+.form-group input,
+.form-group textarea{
+    width:100%;
+    padding:12px;
+    border-radius:8px;
+    border:1px solid #ddd;
+    font-size:15px;
+    outline:none;
+    transition:.3s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus{
+    border-color:#4e73df;
+    box-shadow:0 0 8px rgba(78,115,223,.3);
+}
+
+textarea{
+    resize:none;
+    height:100px;
+}
+
+.preview{
+    width:100%;
+    height:220px;
+    object-fit:cover;
+    border-radius:10px;
+    border:1px solid #ddd;
+    margin-bottom:15px;
+}
+
+.hidden-preview{
+    display:none;
+}
+
+.btn-group{
+    display:flex;
+    gap:10px;
+    margin-top:25px;
+    position:sticky;
+    bottom:0;
+    background:white;
+    padding:15px 0;
+}
+
+.btn{
+    flex:1;
+    padding:12px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:16px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.update-btn{
+    background:#4e73df;
+    color:white;
+}
+
+.update-btn:hover{
+    background:#2e59d9;
+}
+
+.cancel-btn{
+    background:#e74a3b;
+    color:white;
+}
+
+.cancel-btn:hover{
+    background:#c0392b;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+<h2>Admin Panel</h2>
+
+<a href="admin.html">Dashboard</a>
+
+<a href="manage-events.html">
+Manage Events
+</a>
+
+<a href="registrations.html">
+Registrations
+</a>
+
+<a href="all-events.html">
+All Events
+</a>
+
+<a href="index.html">
+Logout
+</a>
+
+</div>
+
+
+<div class="main">
+
+<div class="form-container">
+
+<h2>✏️ Edit Event</h2>
+
+<img
+id="imagePreview"
+class="preview hidden-preview"
+src=""
+alt="Event Preview">
+
+<div class="form-group">
+
+<label for="eventImage">
+Event Image
+</label>
+
+<input
+type="file"
+id="eventImage"
+title="Select Event Image"
+accept="image/*">
+
+</div>
+
+
+<div class="form-group">
+
+<label for="eventTitle">
+Event Title
+</label>
+
+<input
+type="text"
+id="eventTitle"
+placeholder="Enter event title"
+title="Event Title"
+required>
+
+</div>
+
+
+<div class="form-group">
+
+<label for="eventDescription">
+Description
+</label>
+
+<textarea
+id="eventDescription"
+placeholder="Enter event description"
+title="Event Description"
+required></textarea>
+
+</div>
+
+
+<div class="form-group">
+
+<label for="eventDate">
+Event Date
+</label>
+
+<input
+type="date"
+id="eventDate"
+title="Event Date"
+required>
+
+</div>
+
+
+<div class="form-group">
+
+<label for="eventTime">
+Event Time
+</label>
+
+<input
+type="time"
+id="eventTime"
+title="Event Time">
+
+</div>
+
+
+<div class="form-group">
+
+<label for="eventPrice">
+Event Price
+</label>
+
+<input
+type="text"
+id="eventPrice"
+placeholder="Ex: ₹150 or Free"
+title="Event Price"
+required>
+
+</div>
+
+
+<!-- BUTTONS -->
+
+<div class="btn-group">
+
+<button
+class="btn update-btn"
+onclick="updateEvent()">
+
+Update Event
+
+</button>
+
+
+<button
+class="btn cancel-btn"
+onclick="goBack()">
+
+Cancel
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div id="toast"></div>
+
+<script src="edit-event.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+<div class="navbar">
+    <div class="logo">College Event </div>
+
+    <div class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="events.html">Events</a>
+
+        <span id="userGreeting"></span>
+
+        <a href="login.html" id="loginBtn">Login</a>
+
+<a href="#" id="logoutBtn" class="hidden">Logout</a>  
+<a href="my-events.html">My Events</a>
+  </div>
+</div>
+
+<div class="hero">
+    <h1>Welcome to Campzo</h1>
+    <p>Discover & Participate in Campus Events</p>
+    <button onclick="location.href='events.html'">Explore Events</button>
+</div>
+
+<h2 class="section-title">Upcoming Events</h2>
+<div id="eventsContainer" class="event-grid"></div>
+<script>
+function viewEvent(id) {
+    localStorage.setItem("selectedEvent", id);
+    window.location.href = "event-details.html";
+}
+</script>
+<footer class="footer">
+    © 2026 College Event Management
+</footer>
+
+<script src="database.js"></script>
+<script src="script.js"></script>
+<div id="toast-container"></div>
+
+<script src="toast.js"></script>
+</body>
+</html>

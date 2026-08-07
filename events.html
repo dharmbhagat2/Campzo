@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Events</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+
+<div class="navbar">
+    <div class="logo">College Event</div>
+
+<input
+id="searchBox"
+placeholder="Search events..."
+onkeyup="searchEvents()">
+    <div class="nav-right">
+        <a href="index.html">Home</a>
+        <a href="events.html">Events</a>
+
+        <span id="userGreeting"></span>
+
+        <a href="#" onclick="logout()">Logout</a>
+        <a href="my-events.html">My Events</a>
+    </div>
+</div>
+
+<h1 class="page-title">Upcoming Events</h1>
+
+<div id="eventsContainer" class="event-grid"></div>
+
+<script src="events.js"></script>
+<div id="toast-container"></div>
+
+<script src="toast.js"></script>
+</body>
+</html>

@@ -1,0 +1,151 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+
+    background:linear-gradient(135deg,#253b80,#5da7c7);
+
+}
+
+nav{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:18px 40px;
+
+    background:#234a73;
+
+    color:white;
+
+}
+
+nav a{
+
+    color:white;
+
+    text-decoration:none;
+
+    margin-left:20px;
+
+}
+
+.container{
+
+    width:90%;
+
+    max-width:1100px;
+
+    margin:30px auto;
+
+}
+
+h1{
+
+    color:white;
+
+    text-align:center;
+
+    margin-bottom:30px;
+
+}
+
+.scanner-card,
+.attendance-card{
+
+    background:white;
+
+    border-radius:12px;
+
+    padding:25px;
+
+    margin-bottom:30px;
+
+    box-shadow:0 5px 20px rgba(0,0,0,.2);
+
+}
+
+#reader{
+
+    width:350px;
+
+    margin:auto;
+
+}
+
+#scannerStatus{
+
+    text-align:center;
+
+    margin-top:20px;
+
+    color:#444;
+
+    font-weight:bold;
+
+}
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+table td{
+
+    padding:15px;
+
+    border-bottom:1px solid #eee;
+
+}
+
+.stats{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:20px;
+
+}
+
+.box{
+
+    background:white;
+
+    text-align:center;
+
+    border-radius:12px;
+
+    padding:30px;
+
+    box-shadow:0 5px 20px rgba(0,0,0,.2);
+
+}
+
+.box h3{
+
+    color:#333;
+
+}
+
+.box span{
+
+    display:block;
+
+    margin-top:15px;
+
+    font-size:40px;
+
+    color:#4e73df;
+
+    font-weight:bold;
+
+}

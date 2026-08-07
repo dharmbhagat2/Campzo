@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Event Details</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="navbar">
+    <div class="logo">College Event</div>
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="events.html">Events</a>
+    </div>
+</div>
+
+<div class="event-details-container">
+
+    <img id="eventImage" alt="Event Image" class="event-image">
+
+    <h2 id="eventTitle" class="event-title">Event Title</h2>
+
+    <p id="eventDescription" class="event-description">
+        Event description will appear here.
+    </p>
+
+    <div class="event-info">
+        <p><strong>Date:</strong> <span id="eventDate"></span></p>
+        <p><strong>Price:</strong> ₹ <span id="eventPrice"></span></p>
+        <p><strong>Contact:</strong> 
+            <span id="eventMobile"></span> | 
+            <span id="eventEmail"></span>
+        </p>
+    </div>
+
+    <div class="event-actions">
+        <button onclick="registerEvent()">Register</button>
+        <button onclick="history.back()">Back</button>
+    </div>
+
+</div>
+
+<script src="event-details.js"></script>
+<div id="toast-container"></div>
+
+<script src="toast.js"></script>
+</body>
+</html>

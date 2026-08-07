@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Attendance Scanner</title>
+
+    <link rel="stylesheet" href="attendance.css">
+
+    <script src="https://unpkg.com/html5-qrcode"></script>
+
+</head>
+
+<body>
+
+    <nav>
+
+        <div class="logo">
+            Campzo Admin
+        </div>
+
+        <div>
+
+            <a href="admin.html">Dashboard</a>
+
+            <a href="manage-events.html">Events</a>
+
+            <a href="registrations.html">Registrations</a>
+
+        </div>
+
+    </nav>
+
+    <div class="container">
+
+        <h1>QR Attendance Scanner</h1>
+
+        <div class="scanner-card">
+
+            <h2>Scan Student QR</h2>
+
+            <div id="reader" style="width:350px;margin:auto;"></div>
+
+            <p id="scannerStatus">
+                Waiting for QR Scan...
+            </p>
+
+        </div>
+
+        <div class="attendance-card">
+
+            <h2>Last Attendance</h2>
+
+            <table>
+
+                <tr>
+                    <td>Name</td>
+                    <td id="studentName">-</td>
+                </tr>
+
+                <tr>
+                    <td>Event</td>
+                    <td id="eventTitle">-</td>
+                </tr>
+
+                <tr>
+                    <td>Ticket ID</td>
+                    <td id="ticketId">-</td>
+                </tr>
+
+                <tr>
+                    <td>Status</td>
+                    <td id="attendanceStatus">Waiting...</td>
+                </tr>
+
+            </table>
+
+        </div>
+
+        <div class="stats">
+
+            <div class="box">
+
+                <h3>Total Present</h3>
+
+                <span id="presentCount">0</span>
+
+            </div>
+
+            <div class="box">
+
+                <h3>Total Absent</h3>
+
+                <span id="absentCount">0</span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="attendance.js"></script>
+
+</body>
+
+</html>
