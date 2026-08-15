@@ -803,6 +803,40 @@ app.post("/scan-attendance", (req, res) => {
 
 });
 // ==========================================
+// ATTENDANCE STATS
+// ==========================================
+
+app.get("/attendance-stats", (req, res) => {
+
+    const sql = `
+        SELECT
+            COUNT(*) AS total,
+            SUM(CASE WHEN attendance = 'Present' THEN 1 ELSE 0 END) AS present,
+            SUM(CASE WHEN attendance = 'Present' THEN 0 ELSE 1 END) AS absent
+        FROM registrations
+    `;
+
+    db.query(sql, (err, result) => {
+
+        if (err) {
+            console.log("Attendance Stats Error:", err);
+            return res.status(500).json({
+                success: false,
+                message: "Unable to fetch attendance stats"
+            });
+        }
+
+        res.json({
+            success: true,
+            total: result[0].total || 0,
+            present: result[0].present || 0,
+            absent: result[0].absent || 0
+        });
+
+    });
+
+});
+// ==========================================
 // SERVE FRONTEND
 // ==========================================
 app.use(express.static(path.join(__dirname, "../")));
