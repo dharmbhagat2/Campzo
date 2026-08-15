@@ -149,3 +149,21 @@ table td{
     font-weight:bold;
 
 }
+#scanNextBtn {
+    display: block;
+    margin: 20px auto;
+    padding: 14px 35px;
+    font-size: 18px;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    background: #2563eb;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#scanNextBtn:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+}
