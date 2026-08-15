@@ -64,6 +64,8 @@ async function login() {
 }
 async function register() {
 
+    const registerBtn = document.getElementById("registerBtn");
+
     let name = document.getElementById("name").value.trim();
     let email = document.getElementById("email").value.trim();
     let mobile = document.getElementById("mobile").value.trim();
@@ -76,6 +78,11 @@ async function register() {
 
     }
 
+    // Prevent multiple clicks
+    if (registerBtn.disabled) {
+        return;
+    }
+
     pendingUser = {
         name,
         email,
@@ -83,24 +90,27 @@ async function register() {
         password
     };
 
+    // Disable button immediately
+    registerBtn.disabled = true;
+    registerBtn.innerHTML = "Sending OTP...";
+
     try {
 
-        const response = await fetch("https://campzo.onrender.com/send-otp", {
+        const response = await fetch(
+            "https://campzo.onrender.com/send-otp",
+            {
+                method: "POST",
 
-            method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
 
-            headers: {
-                "Content-Type": "application/json"
-            },
-
-            body: JSON.stringify({
-
-                email,
-                name
-
-            })
-
-        });
+                body: JSON.stringify({
+                    email,
+                    name
+                })
+            }
+        );
 
         const data = await response.json();
 
@@ -121,6 +131,12 @@ async function register() {
         console.log(err);
 
         showToast("Unable to send OTP", "error");
+
+    } finally {
+
+        // Enable again after request finishes
+        registerBtn.disabled = false;
+        registerBtn.innerHTML = "Register";
 
     }
 
